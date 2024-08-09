@@ -31,7 +31,7 @@ const Index = () => {
 
   const triggerFireworks = () => {
     setShowFireworks(true);
-    setTimeout(() => setShowFireworks(false), 2000);
+    setTimeout(() => setShowFireworks(false), 5000);
   };
 
   return (
