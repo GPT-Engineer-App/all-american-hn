@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Flag, Star, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Fireworks from '../components/Fireworks';
 
 const fetchHNStories = async () => {
   const response = await fetch('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=100');
@@ -25,8 +27,16 @@ const Index = () => {
 
   if (error) return <div className="text-center text-red-500">An error occurred: {error.message}</div>;
 
+  const [showFireworks, setShowFireworks] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowFireworks(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-b from-red-100 via-white to-blue-100 text-blue-900">
+    <div className="min-h-screen p-8 bg-gradient-to-b from-red-100 via-white to-blue-100 text-blue-900 relative overflow-hidden">
+      {showFireworks && <Fireworks />}
       <header className="mb-8 text-center">
         <h1 className="text-5xl font-bold mb-4 text-red-700 flex items-center justify-center">
           <Flag className="mr-2 text-blue-700" />
@@ -70,16 +80,21 @@ const Index = () => {
                   {story.num_comments} Patriotic Comments
                 </p>
               </div>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="w-full bg-gradient-to-r from-red-500 via-white to-blue-500 text-blue-900 hover:from-red-600 hover:to-blue-600 hover:text-white border-2 border-blue-500 transition-all duration-300"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                  Explore American Innovation <ExternalLink className="ml-2 h-5 w-5" />
-                </a>
-              </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="w-full bg-gradient-to-r from-red-500 via-white to-blue-500 text-blue-900 hover:from-red-600 hover:to-blue-600 hover:text-white border-2 border-blue-500 transition-all duration-300"
+                >
+                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                    Explore American Innovation <ExternalLink className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
+              </motion.div>
             </div>
           ))}
         </div>
