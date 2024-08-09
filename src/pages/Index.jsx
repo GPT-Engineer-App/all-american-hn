@@ -96,11 +96,10 @@ const Index = () => {
                   variant="outline"
                   size="lg"
                   asChild
-                  className="w-full text-blue-900 hover:text-white border-2 border-blue-500 transition-all duration-300 relative overflow-hidden group"
+                  className="w-full text-blue-900 border-2 border-blue-500 transition-all duration-300 relative overflow-hidden group bg-gradient-to-r from-red-500 via-white to-blue-500 hover:from-red-600 hover:via-white hover:to-blue-600"
                 >
-                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                    <span className="absolute inset-0 bg-gradient-to-r from-red-500 via-white to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-gradient-x"></span>
-                    <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-2 px-4">
+                    <span className="relative z-10 group-hover:text-white transition-colors duration-300 font-semibold">
                       Explore American Innovation <ExternalLink className="ml-2 h-5 w-5 inline" />
                     </span>
                   </a>
