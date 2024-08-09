@@ -1,68 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const Firework = ({ delay, x, y }) => {
+const Firework = ({ x, y }) => {
   const colors = ['#ff0000', '#ffffff', '#0000ff'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
   return (
     <motion.div
-      className="absolute w-6 h-6 rounded-full"
-      style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}
+      className="absolute w-2 h-2 rounded-full"
+      style={{ backgroundColor: color }}
       initial={{ scale: 0, opacity: 1, x, y }}
       animate={{
-        scale: [0, 8, 8],
+        scale: [0, 4, 4],
         opacity: [1, 1, 0],
-        y: [y, y - 200],
+        y: y - Math.random() * 200,
       }}
-      transition={{
-        duration: 1,
-        ease: 'easeOut',
-        times: [0, 0.2, 1],
-        delay: delay,
-      }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
     />
   );
 };
 
-const StarSpangle = ({ delay, x, y }) => {
-  return (
-    <motion.div
-      className="absolute text-2xl"
-      initial={{ scale: 0, opacity: 1, x, y }}
-      animate={{
-        scale: [0, 1, 1],
-        opacity: [1, 1, 0],
-        y: [y, y - 100],
-      }}
-      transition={{
-        duration: 1.5,
-        ease: 'easeOut',
-        times: [0, 0.2, 1],
-        delay: delay,
-      }}
-    >
-      ⭐
-    </motion.div>
-  );
-};
+const Fireworks = () => {
+  const [fireworks, setFireworks] = useState([]);
 
-const Fireworks = ({ trigger }) => {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFireworks(prev => [
+        ...prev,
+        { id: Date.now(), x: Math.random() * window.innerWidth, y: window.innerHeight }
+      ]);
+    }, 50);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      setTimeout(() => setFireworks([]), 700); // Clear fireworks after last one fades
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="fixed inset-0 pointer-events-none">
-      {trigger && [...Array(100)].map((_, index) => (
-        <React.Fragment key={index}>
-          <Firework
-            delay={Math.random() * 0.3}
-            x={Math.random() * window.innerWidth}
-            y={window.innerHeight}
-          />
-          {index % 5 === 0 && (
-            <StarSpangle
-              delay={Math.random() * 0.3}
-              x={Math.random() * window.innerWidth}
-              y={window.innerHeight}
-            />
-          )}
-        </React.Fragment>
+      {fireworks.map(fw => (
+        <Firework key={fw.id} x={fw.x} y={fw.y} />
       ))}
     </div>
   );
