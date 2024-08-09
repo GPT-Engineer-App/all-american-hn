@@ -6,7 +6,7 @@ import { ExternalLink, Flag, Star, Zap, Sparkles, Rocket, Twitter } from 'lucide
 import { TwitterShareButton } from 'react-share';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fireworks from '../components/Fireworks';
-import { Confetti } from 'react-confetti';
+import Confetti from 'react-confetti';
 
 const fetchHNStories = async () => {
   const response = await fetch('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=100');
@@ -50,7 +50,7 @@ const Index = () => {
     <div className="min-h-screen p-8 bg-gradient-to-r from-red-500 via-white to-blue-500 animate-gradient-x bg-[length:400%_400%] text-blue-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%221%22 fill=%22%23fff%22 opacity=%220.5%22%2F%3E%3C%2Fsvg%3E')] animate-twinkle"></div>
       <Fireworks trigger={showFireworks} />
-      {showConfetti && <Confetti />}
+      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />}
       <header className="mb-8 text-center">
         <motion.h1 
           className="text-6xl font-extrabold mb-4 text-red-700 flex items-center justify-center"
