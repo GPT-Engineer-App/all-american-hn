@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Flag, Star, Zap, Sparkles, Rocket } from 'lucide-react';
+import { ExternalLink, Flag, Star, Zap, Sparkles, Rocket, Twitter } from 'lucide-react';
+import { TwitterShareButton } from 'react-share';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fireworks from '../components/Fireworks';
 import { Confetti } from 'react-confetti';
@@ -140,23 +141,44 @@ const Index = () => {
                   {story.num_comments * 5} Ultra-Patriotic Comments
                 </p>
               </div>
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: [0, -1, 1, -1, 0] }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  asChild
-                  className="w-full text-blue-900 border-4 border-blue-500 transition-all duration-300 relative overflow-hidden group bg-gradient-to-r from-red-500 via-white to-blue-500 hover:from-red-600 hover:via-white hover:to-blue-600 rounded-full shadow-lg"
+              <div className="flex space-x-4">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: [0, -1, 1, -1, 0] }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex-grow"
                 >
-                  <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-3 px-6">
-                    <span className="relative z-10 group-hover:text-white transition-colors duration-300 font-extrabold text-xl">
-                      🚀 Blast Off to American Innovation 🚀 <ExternalLink className="ml-2 h-6 w-6 inline" />
-                    </span>
-                  </a>
-                </Button>
-              </motion.div>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    asChild
+                    className="w-full text-blue-900 border-4 border-blue-500 transition-all duration-300 relative overflow-hidden group bg-gradient-to-r from-red-500 via-white to-blue-500 hover:from-red-600 hover:via-white hover:to-blue-600 rounded-full shadow-lg"
+                  >
+                    <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center py-3 px-6">
+                      <span className="relative z-10 group-hover:text-white transition-colors duration-300 font-extrabold text-xl">
+                        🚀 Blast Off to American Innovation 🚀 <ExternalLink className="ml-2 h-6 w-6 inline" />
+                      </span>
+                    </a>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: [0, -1, 1, -1, 0] }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <TwitterShareButton
+                    url={story.url}
+                    title={`Check out this amazing tech story: ${story.title}`}
+                    hashtags={["TechNews", "AmericanInnovation"]}
+                  >
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-12 h-12 text-blue-500 border-4 border-blue-500 transition-all duration-300 bg-white hover:bg-blue-100 rounded-full shadow-lg"
+                    >
+                      <Twitter className="h-6 w-6" />
+                    </Button>
+                  </TwitterShareButton>
+                </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
