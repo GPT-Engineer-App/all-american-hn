@@ -30,21 +30,17 @@ const Index = () => {
   if (error) return <div className="text-center text-red-500">An error occurred: {error.message}</div>;
 
   const [showFireworks, setShowFireworks] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const triggerFireworks = () => {
     setShowFireworks(true);
     setTimeout(() => setShowFireworks(false), 5000);
   };
 
-  const [showConfetti, setShowConfetti] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000);
-    }, 30000);
-    return () => clearInterval(interval);
-  }, []);
+  const triggerConfetti = () => {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 5000);
+  };
 
   return (
     <div className="min-h-screen p-8 bg-gradient-to-r from-red-500 via-white to-blue-500 animate-gradient-x bg-[length:400%_400%] text-blue-900 relative overflow-hidden">
@@ -105,7 +101,7 @@ const Index = () => {
           <Sparkles className="mr-2" /> Unleash Freedom Fireworks!
         </Button>
         <Button
-          onClick={() => setShowConfetti(true)}
+          onClick={triggerConfetti}
           className="bg-gradient-to-r from-blue-500 via-white to-red-500 text-red-900 hover:from-blue-600 hover:to-red-600 hover:text-white border-4 border-red-500 transition-all duration-300 text-lg font-bold py-3 px-6 rounded-full shadow-lg"
         >
           <Rocket className="mr-2" /> Launch Liberty Confetti!
