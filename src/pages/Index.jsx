@@ -35,7 +35,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-b from-red-100 via-white to-blue-100 text-blue-900 relative overflow-hidden">
+    <div className="min-h-screen p-8 bg-gradient-to-r from-red-100 via-white to-blue-100 animate-gradient-x bg-[length:400%_400%] text-blue-900 relative overflow-hidden">
       <Fireworks trigger={showFireworks} />
       <header className="mb-8 text-center">
         <h1 className="text-5xl font-bold mb-4 text-red-700 flex items-center justify-center">
