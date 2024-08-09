@@ -165,13 +165,9 @@ const Index = () => {
                     title={`Check out this amazing tech story: ${story.title}`}
                     hashtags={["TechNews", "AmericanInnovation"]}
                   >
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="w-12 h-12 text-blue-500 border-4 border-blue-500 transition-all duration-300 bg-white hover:bg-blue-100 rounded-full shadow-lg"
-                    >
+                    <div className="w-12 h-12 flex items-center justify-center text-blue-500 border-4 border-blue-500 transition-all duration-300 bg-white hover:bg-blue-100 rounded-full shadow-lg cursor-pointer">
                       <Twitter className="h-6 w-6" />
-                    </Button>
+                    </div>
                   </TwitterShareButton>
                 </motion.div>
               </div>
