@@ -1,34 +1,38 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Firework = ({ delay }) => {
+const Firework = ({ delay, x, y }) => {
+  const colors = ['#ff0000', '#ffffff', '#0000ff', '#ffff00'];
   return (
     <motion.div
-      className="absolute w-2 h-2 bg-yellow-300 rounded-full"
-      initial={{ scale: 0, opacity: 1 }}
+      className="absolute w-4 h-4 rounded-full"
+      style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}
+      initial={{ scale: 0, opacity: 1, x, y }}
       animate={{
-        scale: [0, 4, 4],
+        scale: [0, 5, 5],
         opacity: [1, 1, 0],
-        top: ['-10%', '-50%'],
-        left: ['50%', `${Math.random() * 100}%`],
+        y: [y, y - 100],
       }}
       transition={{
-        duration: 2,
+        duration: 1.5,
         ease: 'easeOut',
         times: [0, 0.2, 1],
         delay: delay,
-        repeat: Infinity,
-        repeatDelay: Math.random() * 3 + 1,
       }}
     />
   );
 };
 
-const Fireworks = () => {
+const Fireworks = ({ trigger }) => {
   return (
     <div className="fixed inset-0 pointer-events-none">
-      {[...Array(20)].map((_, index) => (
-        <Firework key={index} delay={Math.random() * 2} />
+      {trigger && [...Array(50)].map((_, index) => (
+        <Firework
+          key={index}
+          delay={Math.random() * 0.5}
+          x={Math.random() * window.innerWidth}
+          y={window.innerHeight}
+        />
       ))}
     </div>
   );

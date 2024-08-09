@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Flag, Star, Zap } from 'lucide-react';
+import { ExternalLink, Flag, Star, Zap, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Fireworks from '../components/Fireworks';
 
@@ -29,14 +29,14 @@ const Index = () => {
 
   const [showFireworks, setShowFireworks] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowFireworks(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  const triggerFireworks = () => {
+    setShowFireworks(true);
+    setTimeout(() => setShowFireworks(false), 2000);
+  };
 
   return (
     <div className="min-h-screen p-8 bg-gradient-to-b from-red-100 via-white to-blue-100 text-blue-900 relative overflow-hidden">
-      {showFireworks && <Fireworks />}
+      <Fireworks trigger={showFireworks} />
       <header className="mb-8 text-center">
         <h1 className="text-5xl font-bold mb-4 text-red-700 flex items-center justify-center">
           <Flag className="mr-2 text-blue-700" />
@@ -55,6 +55,14 @@ const Index = () => {
         />
         <Star className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500" />
         <Zap className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-500" />
+      </div>
+      <div className="mb-6 text-center">
+        <Button
+          onClick={triggerFireworks}
+          className="bg-gradient-to-r from-red-500 via-white to-blue-500 text-blue-900 hover:from-red-600 hover:to-blue-600 hover:text-white border-2 border-blue-500 transition-all duration-300"
+        >
+          <Sparkles className="mr-2" /> Celebrate with Fireworks!
+        </Button>
       </div>
       {isLoading ? (
         <div className="space-y-4">
