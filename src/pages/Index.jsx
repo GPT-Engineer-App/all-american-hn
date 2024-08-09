@@ -96,8 +96,10 @@ const Index = () => {
                   variant="outline"
                   size="lg"
                   asChild
-                  className="w-full bg-gradient-to-r from-red-500 via-white to-blue-500 text-blue-900 hover:from-red-600 hover:to-blue-600 hover:text-white border-2 border-blue-500 transition-all duration-300"
+                  className="w-full text-blue-900 hover:text-white border-2 border-blue-500 transition-all duration-300 relative overflow-hidden"
                 >
+                  <span className="absolute inset-0 bg-gradient-to-r from-red-500 via-white to-blue-500 animate-gradient-x"></span>
+                  <span className="relative z-10">
                   <a href={story.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                     Explore American Innovation <ExternalLink className="ml-2 h-5 w-5" />
                   </a>
