@@ -44,9 +44,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen p-8 bg-gradient-to-r from-red-500 via-white to-blue-500 animate-gradient-x bg-[length:400%_400%] text-blue-900 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%221%22 fill=%22%23fff%22 opacity=%220.5%22%2F%3E%3C%2Fsvg%3E')] animate-twinkle"></div>
-      {showFireworks && <Fireworks />}
-      {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} />}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22%3E%3Ccircle cx=%2240%22 cy=%2240%22 r=%221%22 fill=%22%23fff%22 opacity=%220.5%22%2F%3E%3C%2Fsvg%3E')] animate-twinkle z-0"></div>
+      {showFireworks && <div className="z-40"><Fireworks /></div>}
+      {showConfetti && <div className="z-40"><Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} /></div>}
       <header className="mb-8 text-center">
         <motion.h1 
           className="text-6xl font-extrabold mb-4 text-red-700 flex items-center justify-center"
@@ -93,16 +93,16 @@ const Index = () => {
           <Zap className="text-blue-500" size={24} />
         </motion.div>
       </motion.div>
-      <div className="mb-6 text-center space-x-4">
+      <div className="mb-6 text-center space-x-4 relative z-50">
         <Button
           onClick={triggerFireworks}
-          className="bg-gradient-to-r from-red-500 via-white to-blue-500 text-blue-900 hover:from-red-600 hover:to-blue-600 hover:text-white border-4 border-blue-500 transition-all duration-300 text-lg font-bold py-3 px-6 rounded-full shadow-lg"
+          className="bg-gradient-to-r from-red-500 via-white to-blue-500 text-blue-900 hover:from-red-600 hover:to-blue-600 hover:text-white border-4 border-blue-500 transition-all duration-300 text-lg font-bold py-3 px-6 rounded-full shadow-lg relative z-50"
         >
           <Sparkles className="mr-2" /> Unleash Freedom Fireworks!
         </Button>
         <Button
           onClick={triggerConfetti}
-          className="bg-gradient-to-r from-blue-500 via-white to-red-500 text-red-900 hover:from-blue-600 hover:to-red-600 hover:text-white border-4 border-red-500 transition-all duration-300 text-lg font-bold py-3 px-6 rounded-full shadow-lg"
+          className="bg-gradient-to-r from-blue-500 via-white to-red-500 text-red-900 hover:from-blue-600 hover:to-red-600 hover:text-white border-4 border-red-500 transition-all duration-300 text-lg font-bold py-3 px-6 rounded-full shadow-lg relative z-50"
         >
           <Rocket className="mr-2" /> Launch Liberty Confetti!
         </Button>
